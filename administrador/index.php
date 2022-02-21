@@ -1,7 +1,17 @@
 <?php
-    if($_POST){
-        
-        header('Location:inicio.php'); //Redireccionar a una pagina especificada
+    session_start(); //obligatorio para crear sesiones 
+     if($_POST){
+        if (($_POST['usuario']=="alegenesis") AND ($_POST['clave']=="prueba")){
+            $_SESSION['usuario']="ok";
+            $_SESSION['nombreUsuario']="alegenesis";
+            
+             header('Location:inicio.php'); //Redireccionar a una pagina especificada
+        }else{
+            $mensaje="los datos son incorrectos";
+        }
+
+
+
     }
 ?>
 
@@ -33,11 +43,18 @@
                         </div>
                         <div class="card-body">
 
+                        <?php if(isset($mensaje)) { ?>
+
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $mensaje; ?>
+                                </div>
+                            <?php }?>
+
                             <form method="POST"  >
 
                                 <div class="form-group">
                                     <label>Usuario</label>
-                                    <input type="email" class="form-control" name="usuario" aria-describedby="emailHelp" placeholder="Ingresa su usuario'">
+                                    <input type="text" class="form-control" name="usuario" aria-describedby="emailHelp" placeholder="Ingresa su usuario">
                                 </div>
                                 
                                 <div class="form-group">
